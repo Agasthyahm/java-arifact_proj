@@ -1,10 +1,19 @@
 pipeline{
   agent { label 'node2'}
+  environment{
+    token=credentials.('sonar-token')
+  }
   stages{
     stage('SCM'){
       steps{
       git branch: 'main', url: 'https://github.com/Agasthyahm/java-arifact_proj.git'
       }
     }
+    stage('build and sonar analysis'){
+      steps{
+          sh ''' mvn clean install sonar:sonar \
+                  -DSonar.login=${token} \
+                  -DSonar.host.url='http://51.21.248.107:9000'
+                  -Dsonar.projectkey='java-maven '''
 }
 }
