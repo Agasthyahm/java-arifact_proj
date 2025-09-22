@@ -15,7 +15,23 @@ pipeline{
                   -Dsonar.login=${token} \
                   -Dsonar.host.url=http://51.21.248.107:9000 \
                   -Dsonar.projectKey=Java-pipeline-deploy """
-}
-}
+          }
+      }
+    stage('deploy to artifactory'){
+        steps{
+          script{
+              def server = Artifactory.server('jfrog-artifactory')
+              def uploadSpec = """{
+            "files": [
+              {
+                "pattern": "target/*.war",
+                "target": "java-jfrog-deploy/com/mycompany/hello-world-war/"
+              }
+            ]
+          }"""
+        }
+      }
+  }
+
 }
 }
