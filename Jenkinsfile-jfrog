@@ -14,7 +14,7 @@ pipeline{
           sh """ mvn clean install sonar:sonar \
                   -Dsonar.login=${token} \
                   -Dsonar.host.url=http://51.21.248.107:9000 \
-                  -Dsonar.projectKey=java-maven """
+                  -Dsonar.projectKey=Java-pipeline-deploy """
 }
 }
 }
