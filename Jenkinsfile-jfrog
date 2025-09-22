@@ -1,7 +1,7 @@
 pipeline{
   agent { label 'node2'}
   environment{
-    token=credentials.('sonar-token')
+    token=credentials('sonar-token')
   }
   stages{
     stage('SCM'){
